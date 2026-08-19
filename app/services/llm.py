@@ -363,6 +363,7 @@ def _generate_response(prompt: str, app_config=None) -> str:
                 model=model_name,
                 messages=[{"role": "user", "content": prompt}],
                 extra_body={"enable_thinking": False},
+                max_tokens=2048,
                 stream=True,
             )
             if response:
@@ -386,7 +387,7 @@ def _generate_response(prompt: str, app_config=None) -> str:
         )
 
         response = client.chat.completions.create(
-            model=model_name, messages=[{"role": "user", "content": prompt}]
+            model=model_name, messages=[{"role": "user", "content": prompt}], max_tokens=2048
         )
         if response:
             if isinstance(response, ChatCompletion):
